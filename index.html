@@ -2,9 +2,253 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Prueba</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puyo.io — El Manifiesto de las Papas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>¡Página funcionando en GitHub Pages!</h1>
+  <!-- Ambient background glow effects -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <div class="app-layout">
+    <!-- Mobile Navigation Bar -->
+    <header class="mobile-header">
+      <div class="brand">
+        <span class="brand-icon">🥔</span>
+        <span class="brand-title">puyo<span>.io</span></span>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <span class="brand-icon">🥔</span>
+          <div>
+            <div class="brand-title">puyo<span>.io</span></div>
+            <div class="brand-subtitle">Instituto de Ciencias Culinarias</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Navegación</div>
+        <button class="nav-link active" data-target="inicio">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </span>
+          <span class="nav-text">Inicio</span>
+          <span class="nav-pill">01</span>
+        </button>
+
+        <button class="nav-link" data-target="que-es-un-puyo">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </span>
+          <span class="nav-text">¿Qué es un puyo?</span>
+          <span class="nav-pill">02</span>
+        </button>
+
+        <button class="nav-link" data-target="cuando-estan-las-papas">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </span>
+          <span class="nav-text">¿Cómo saber cuándo están las papas?</span>
+          <span class="nav-pill">03</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="hosting-card">
+          <div class="status-indicator">
+            <span class="status-dot"></span>
+            <span>GitHub Pages Live</span>
+          </div>
+          <p class="hosting-sub">Espacio oficial verificado</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <div class="content-container">
+
+        <!-- SECCIÓN 1: INICIO -->
+        <section id="inicio" class="content-section active">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>Filosofía & Sabiduría</span>
+          </div>
+          
+          <h1 class="hero-title">
+            No hay que tener miedo <br>
+            <span class="gradient-text">de ser un puyo.</span>
+          </h1>
+
+          <p class="hero-description">
+            Aceptarlo no es una debilidad, es el primer paso hacia la verdadera iluminación y la paz mental frente a la hornalla.
+          </p>
+
+          <div class="cards-grid">
+            <div class="glass-card stat-card">
+              <div class="card-icon">🧘‍♂️</div>
+              <div class="card-title">Aceptación</div>
+              <div class="card-value">100%</div>
+              <div class="card-caption">Nivel de resignación espiritual</div>
+            </div>
+
+            <div class="glass-card stat-card">
+              <div class="card-icon">🔥</div>
+              <div class="card-title">Pronóstico</div>
+              <div class="card-value">Pasadas</div>
+              <div class="card-caption">Margen de error inevitable</div>
+            </div>
+
+            <div class="glass-card stat-card">
+              <div class="card-icon">✨</div>
+              <div class="card-title">Dignidad</div>
+              <div class="card-value">Intacta</div>
+              <div class="card-caption">Porque la intención es lo que cuenta</div>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="navigateTo('que-es-un-puyo')">
+              Descubrir la definición
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </button>
+            <button class="btn btn-glass" onclick="navigateTo('cuando-estan-las-papas')">
+              Consultar el reloj
+            </button>
+          </div>
+        </section>
+
+        <!-- SECCIÓN 2: QUÉ ES UN PUYO -->
+        <section id="que-es-un-puyo" class="content-section">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>Definición Oficial</span>
+          </div>
+
+          <h1 class="hero-title">
+            ¿Qué es <br>
+            <span class="gradient-text">un puyo?</span>
+          </h1>
+
+          <div class="glass-card main-definition-card">
+            <div class="definition-header">
+              <span class="dict-term">pu·yo</span>
+              <span class="dict-phonetic">/ˈpu.ʝo/</span>
+              <span class="dict-type">sustantivo • coloquial</span>
+            </div>
+
+            <div class="quote-box">
+              <p class="punchline-text">
+                "Es alguien que no sabe cuándo están las papas."
+              </p>
+            </div>
+
+            <div class="features-list">
+              <div class="feature-item">
+                <div class="feature-bullet">🥔</div>
+                <div>
+                  <h4>El pinchazo perpetuo</h4>
+                  <p>Clava el tenedor cada 40 segundos con la esperanza de que ocurra un milagro termodinámico.</p>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-bullet">⏳</div>
+                <div>
+                  <h4>Optimismo infundado</h4>
+                  <p>Pronuncia con convicción la célebre frase: <em>«Dejalas dos minutitos más que le falta un toque»</em>.</p>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-bullet">🍟</div>
+                <div>
+                  <h4>Puré accidental</h4>
+                  <p>Capaz de transformar papas al horno en puré deconstruido sin previo aviso.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECCIÓN 3: CÓMO SABER CUÁNDO ESTÁN LAS PAPAS -->
+        <section id="cuando-estan-las-papas" class="content-section">
+          <div class="badge">
+            <span class="badge-dot badge-warn"></span>
+            <span>Algoritmo de Precisión</span>
+          </div>
+
+          <h1 class="hero-title">
+            ¿Cómo saber cuándo <br>
+            <span class="gradient-text-warn">están las papas?</span>
+          </h1>
+
+          <div class="glass-card verdict-card">
+            <div class="verdict-banner">
+              <div class="verdict-tag">Veredicto Inmediato</div>
+              <div class="big-verdict">
+                Ya se te pasaron las papas.
+              </div>
+              <p class="verdict-sub">
+                Si tuviste que buscarlo o abrir esta página para chequearlo, la ley universal de la física culinaria indica que ya es tarde.
+              </p>
+            </div>
+
+            <div class="interactive-tester">
+              <div class="tester-label">Escáner cuántico de papas en tiempo real:</div>
+              <button id="scanBtn" class="btn btn-scan">
+                <span class="btn-icon">⚡</span>
+                <span id="scanBtnText">Escanear el estado de mi olla</span>
+              </button>
+              
+              <div id="scanResult" class="scan-result hidden">
+                <div class="scan-loader" id="scanLoader">
+                  <div class="spinner"></div>
+                  <span>Analizando densidad molecular del tubérculo...</span>
+                </div>
+                <div class="scan-verdict hidden" id="scanVerdict">
+                  <div class="scan-alert">🔥 CONFIRMADO:</div>
+                  <p>Efectivamente, se te recontra pasaron. Apagá el fuego y prepará el tenedor para hacer puré.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
