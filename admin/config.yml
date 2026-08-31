@@ -2,6 +2,7 @@ backend:
   name: github
   repo: marianoboragno/marianoboragno.github.io
   branch: main
+  auth_type: implicit
 
 # Dónde se guardan las imágenes que subas desde el panel
 media_folder: "assets/img"
