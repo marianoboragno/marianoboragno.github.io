@@ -3,15 +3,16 @@ backend:
   repo: marianoboragno/marianoboragno.github.io
   branch: main
 
-# Dónde se guardan las imágenes que subas desde el panel
-media_folder: "assets/img"
+# Dónde guarda Sveltia las imágenes en el repositorio
+media_folder: "public/assets/img"
+# Qué ruta escribe en el Markdown para que el navegador la encuentre
 public_folder: "/assets/img"
 
 # Colecciones de contenido
 collections:
   - name: "noticias_puyo"
     label: "Noticias Puyo"
-    folder: "noticias_puyo"
+    folder: "src/content/noticias_puyo"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:

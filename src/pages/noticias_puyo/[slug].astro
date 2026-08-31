@@ -1,0 +1,42 @@
+---
+// getStaticPaths le dice a Astro qué URLs tiene que generar
+export async function getStaticPaths() {
+  const notas = Object.values(import.meta.glob('../../content/noticias_puyo/*.md', { eager: true }));
+  
+  return notas.map((nota) => {
+    const slug = nota.file.split('/').pop().replace('.md', '');
+    return {
+      params: { slug }, // Define la URL
+      props: { nota },  // Le pasa los datos del Markdown a la plantilla
+    };
+  });
+}
+
+// Recibimos los datos de la nota actual
+const { nota } = Astro.props;
+// Extraemos el componente Content, que es el cuerpo del Markdown ya convertido a HTML
+const { Content } = nota;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{nota.frontmatter.title} - Noticias Puyo</title>
+  </head>
+  <body style="font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
+    <a href="/" style="color: blue; text-decoration: none;">← Volver al inicio</a>
+    <hr style="margin: 20px 0;" />
+    
+    <h1>{nota.frontmatter.title}</h1>
+    <p style="color: #666;">Publicado el {new Date(nota.frontmatter.date).toLocaleDateString('es-AR')}</p>
+    
+    {nota.frontmatter.thumbnail && (
+      <img src={nota.frontmatter.thumbnail} alt="Portada de la noticia" style="width: 100%; max-width: 600px; display: block; margin: 20px 0; border-radius: 8px;" />
+    )}
+    
+    <div style="line-height: 1.6; font-size: 1.1rem;">
+      <Content />
+    </div>
+  </body>
+</html>

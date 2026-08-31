@@ -1,0 +1,38 @@
+---
+// Todo lo que está entre los tres guiones se ejecuta en el servidor al compilar.
+// Traemos todos los archivos Markdown de tus noticias.
+const notas = Object.values(import.meta.glob('../content/noticias_puyo/*.md', { eager: true }));
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Noticias Puyo</title>
+  </head>
+  <body style="font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
+    <h1>Noticias Puyo</h1>
+    <hr />
+    
+    <h2>Últimas noticias</h2>
+    <ul>
+      {notas.map((nota) => {
+        // Extraemos el nombre del archivo para armar la URL
+        const slug = nota.file.split('/').pop().replace('.md', '');
+        
+        return (
+          <li style="margin-bottom: 20px;">
+            <a href={`/noticias_puyo/${slug}`}>
+              <h3>{nota.frontmatter.title}</h3>
+            </a>
+            <small>{new Date(nota.frontmatter.date).toLocaleDateString('es-AR')}</small>
+            <br />
+            {nota.frontmatter.thumbnail && (
+              <img src={nota.frontmatter.thumbnail} alt="miniatura" style="max-width: 200px; margin-top: 10px;" />
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  </body>
+</html>
