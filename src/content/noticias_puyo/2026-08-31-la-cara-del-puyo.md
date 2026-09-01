@@ -1,6 +1,6 @@
 ---
 title: |-
-  **_La Cara del Puyo_**
+  **_La Cara_** 
 
   _Así se ven los auténticos Puyos_
 date: 2026-08-27T18:03:00
