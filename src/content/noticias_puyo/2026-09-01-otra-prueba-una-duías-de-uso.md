@@ -1,8 +1,8 @@
 ---
 title: |-
-  Los osciloscopios
+  **_Los osciloscopios_**
 
-  Una Guía de Uso
+  _Una Guía de Uso_
 date: 2026-08-19T19:08:00
 thumbnail: /assets/img/pasted-image-1788237504408.png
 ---
