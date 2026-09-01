@@ -138,6 +138,18 @@ const titleHtml = rawTitle
     margin: 0;
   }
 
+  /* Para las palabras comunes: usa las reglas del idioma español para cortar por sílabas */
+  .cuerpo-texto {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  /* Para las URLs largas: permite el corte en cualquier lugar para que no desborden la columna */
+  .cuerpo-texto a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
   .cuerpo-texto blockquote {
     margin: 20px 0;
     padding: 0;
