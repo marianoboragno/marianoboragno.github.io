@@ -66,33 +66,26 @@ const tabTitle = firstLine
   body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
-    padding: 15px;
-    position: relative;
+    padding: 0;
+    background-color: #ffffff;
+    color: #222;
   }
 
   .background-patron {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('/assets/img/fondo-mercedes.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    z-index: -1;
+    display: none;
   }
 
   .nota-container {
-    max-width: 900px;
+    width: 100%;
     margin: 0 auto;
     background: #ffffff;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: none;
   }
 
   .imagen-portada {
     width: 100%;
-    height: auto;
+    max-height: 520px;
+    object-fit: cover;
     display: block;
   }
 
@@ -217,10 +210,12 @@ const tabTitle = firstLine
 
   @media (min-width: 768px) {
     body {
-      padding: 40px;
+      padding: 0;
     }
     .content-section {
-      padding: 30px 50px 50px 50px;
+      padding: 40px 60px 80px 60px;
+      max-width: 1280px;
+      margin: 0 auto;
     }
     .titulo {
       font-size: 5rem;
@@ -228,7 +223,7 @@ const tabTitle = firstLine
     }
     .cuerpo-texto {
       column-count: 2;
-      column-gap: 40px;
+      column-gap: 50px;
     }
   }
 </style>
