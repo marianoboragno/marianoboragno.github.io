@@ -1,14 +1,14 @@
 ---
 title: |-
-  **_Los osciloscopios_**
+  **_Bomberos y municipio avanzan_** 
 
-  _Una Guía de Uso_
+  Ustarroz firma decreto por nueva entrega de fondos
 date: 2026-08-19T19:08:00
-thumbnail: /assets/img/pasted-image-1788237504408.png
+thumbnail: /assets/img/B2-1024x682.webp
 ---
 
-Y así es como aprendés a usar tu osciloscopio. Proin sodales ligula ac ex imperdiet, nec efficitur justo dictum. Mauris rhoncus molestie feugiat. Vestibulum ac efficitur diam. Ut consequat interdum neque, ac elementum massa scelerisque vitae. 
+El intendente Juani Ustarroz firmó el decreto de la segunda entrega de fondos para el avance del nuevo destacamento de los Bomberos Voluntarios en Gowland, un viejo sueño de los vecinos cuya construcción cuenta con el financiamiento de la municipalidad, luego de que la primera etapa de la obra fuera finalizada y rendida.
 
-Nullam vitae accumsan ante. Aliquam id libero eu nisl dignissim volutpat nec in lectus. Ut sit amet scelerisque eros. In lacinia rhoncus lectus, et convallis ligula. Sed sollicitudin lectus sit amet leo feugiat.
+El decreto, que el jefe comunal firmó el viernes pasado en su despacho en una reunión con el presidente de la Asociación Cooperadora de los Bomberos Voluntarios, Jonathan Sirch, fue remitido al Honorable Concejo Deliberante para su aprobación. La segunda etapa de la construcción incluye la colocación de vigas, piso de hormigón y cimientos, entre otras obras.
 
-Miralo acá: [https://www.hantek.com/Product/DSO2000/DSO2150_Manual.pdf](https://www.hantek.com/Product/DSO2000/DSO2150_Manual.pdf)
+“Estamos muy contentos con el avance de la obra, que marcha en los plazos previstos, y de acompañar el camino de una institución tan querida por toda la comunidad. El destacamento de los Bomberos es una necesidad y un viejo sueño para los vecinos de Gowland y Agote, que en los últimos tiempos ha crecido muchísimo”, expresó Ustarroz.
