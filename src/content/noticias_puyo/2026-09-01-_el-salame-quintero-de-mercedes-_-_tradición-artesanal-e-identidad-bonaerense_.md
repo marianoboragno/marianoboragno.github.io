@@ -33,6 +33,8 @@ Las entradas anticipadas tienen un valor de **$6.000 por jornada**, mientras qu
 
 Los jubilados abonarán **$5.000** y las personas con **Certificado Único de Discapacidad (CUD)** ingresarán sin costo. El estacionamiento tendrá un valor de **$4.000 para automóviles** y **$10.000 para colectivos**.
 
+<video controls src="/assets/img/video%20salame%20mercedino.mp4"></video>
+
 **El impacto de la edición anterior**
 
 La organización busca mantener los resultados alcanzados durante el **50° aniversario**, cuando la fiesta generó un movimiento económico estimado en **$370 millones**, involucró a más de **290 trabajadores y cooperativistas**, reunió **319 puestos de expositores** y recibió a más de **26.000 visitantes**.
