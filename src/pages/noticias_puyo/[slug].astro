@@ -59,6 +59,60 @@ const tabTitle = firstLine
       </div>
       
     </article>
+
+    <!-- Script automático para transformar enlaces de YouTube y archivos de video en reproductores -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        const cuerpo = document.querySelector('.cuerpo-texto');
+        if (!cuerpo) return;
+
+        // 1. Imágenes insertadas por el editor que en realidad son videos (.mp4, .webm, .mov)
+        const videoImgs = cuerpo.querySelectorAll('img[src$=".mp4"], img[src$=".webm"], img[src$=".mov"], img[src$=".ogg"]');
+        videoImgs.forEach((img) => {
+          const video = document.createElement('video');
+          video.src = img.src;
+          video.controls = true;
+          video.playsInline = true;
+          video.className = 'video-reproductor';
+          img.parentNode.replaceChild(video, img);
+        });
+
+        // 2. Enlaces que apuntan a archivos de video (.mp4, .webm, .mov)
+        const videoLinks = cuerpo.querySelectorAll('a[href$=".mp4"], a[href$=".webm"], a[href$=".mov"], a[href$=".ogg"]');
+        videoLinks.forEach((link) => {
+          const video = document.createElement('video');
+          video.src = link.getAttribute('href');
+          video.controls = true;
+          video.playsInline = true;
+          video.className = 'video-reproductor';
+          
+          const parentP = link.closest('p');
+          if (parentP && parentP.textContent.trim() === link.textContent.trim()) {
+            parentP.parentNode.replaceChild(video, parentP);
+          } else {
+            link.parentNode.replaceChild(video, link);
+          }
+        });
+
+        // 3. Enlaces a videos de YouTube (convierte URLs sueltas en reproductores integrados)
+        const allLinks = cuerpo.querySelectorAll('a');
+        allLinks.forEach((link) => {
+          const href = link.getAttribute('href') || '';
+          const ytMatch = href.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+          
+          if (ytMatch && ytMatch[1]) {
+            const videoId = ytMatch[1];
+            const parentP = link.closest('p');
+            if (parentP && (parentP.textContent.trim() === link.textContent.trim() || parentP.textContent.trim().startsWith('http'))) {
+              const wrapper = document.createElement('div');
+              wrapper.className = 'video-embed-wrapper';
+              wrapper.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}" title="Reproductor de Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+              parentP.parentNode.replaceChild(wrapper, parentP);
+            }
+          }
+        });
+      });
+    </script>
   </body>
 </html>
 
@@ -150,6 +204,48 @@ const tabTitle = firstLine
   }
 
   .cuerpo-texto p:has(img) {
+    break-inside: avoid;
+    margin: 0;
+  }
+
+  /* Reproductores de video locales y embebidos */
+  .cuerpo-texto video,
+  .video-reproductor {
+    width: 100%;
+    max-height: 480px;
+    border-radius: 8px;
+    background: #000;
+    margin: 20px 0;
+    display: block;
+    break-inside: avoid;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  .video-embed-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    break-inside: avoid;
+    background: #000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  .video-embed-wrapper iframe,
+  .cuerpo-texto iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    break-inside: avoid;
+  }
+
+  .cuerpo-texto p:has(video),
+  .cuerpo-texto p:has(iframe) {
     break-inside: avoid;
     margin: 0;
   }
