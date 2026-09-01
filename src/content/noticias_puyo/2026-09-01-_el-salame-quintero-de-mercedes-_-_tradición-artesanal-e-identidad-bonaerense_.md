@@ -1,6 +1,9 @@
 ---
-title: '**_Se viene la 51ª Fiesta Nacional del Salame Quintero_**'
-date: 2026-09-01T16:01:00
+title: |-
+  **_Se viene la 51ª Fiesta Nacional del Salame Quintero_**
+
+  El próximo viernes 11, sábado 12 y domingo 13 de septiembre en el Parque Municipal Independencia.
+date: 2026-09-01T16:12:00
 thumbnail: /assets/img/WhatsApp Image 2026-09-01 at 3.32.34 PM.jpeg
 ---
 
