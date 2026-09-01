@@ -1,6 +1,6 @@
 ---
 title: |-
-  **_Mercedes se prepara ante "El Niño"_**
+  **_Mercedes se prepara ante "El Super Niño"_**
 
   _El objetivo es prevenir y dar respuestas a las posibles consecuencias que tendrá en el territorio el fenómeno climático conocido como “Super Niño”._
 date: 2026-09-01T16:01:00
