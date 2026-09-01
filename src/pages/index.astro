@@ -27,6 +27,13 @@ function formatTitle(rawTitle) {
     .replace(/\r?\n+/g, '<br/>');
 }
 
+// Función para obtener sólo el primer renglón limpio sin formato
+function cleanTitle(rawTitle) {
+  if (!rawTitle) return '';
+  const firstLine = rawTitle.split(/\r?\n/)[0] || '';
+  return firstLine.replace(/(\*\*|\*|_|`)/g, '').trim();
+}
+
 // Función para extraer un extracto limpio de texto para la bajada
 function getExcerpt(nota, maxLength = 160) {
   const raw = typeof nota.rawContent === 'function' ? nota.rawContent() : '';
@@ -103,7 +110,7 @@ const fechaHoy = today.toLocaleDateString('es-AR', {
                   <div class="destacada-img-wrapper">
                     <img 
                       src={notaPrincipal.frontmatter.thumbnail} 
-                      alt={notaPrincipal.frontmatter.title} 
+                      alt={cleanTitle(notaPrincipal.frontmatter.title)} 
                       class="destacada-img" 
                     />
                     <span class="tag-tapa">Tapa</span>
@@ -144,7 +151,7 @@ const fechaHoy = today.toLocaleDateString('es-AR', {
                         <div class="secundaria-img-wrapper">
                           <img 
                             src={nota.frontmatter.thumbnail} 
-                            alt={nota.frontmatter.title} 
+                            alt={cleanTitle(nota.frontmatter.title)} 
                             class="secundaria-img" 
                           />
                         </div>

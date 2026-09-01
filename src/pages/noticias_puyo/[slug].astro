@@ -23,13 +23,19 @@ const titleHtml = rawTitle
   .replace(/\*(.*?)\*/g, '<em>$1</em>')
   .replace(/_(.*?)_/g, '<em>$1</em>')
   .replace(/\r?\n+/g, '<br/>');
+
+// Limpieza para la pestaña del navegador: solo el primer renglón y sin Markdown
+const firstLine = rawTitle.split(/\r?\n/)[0] || '';
+const tabTitle = firstLine
+  .replace(/(\*\*|\*|_|`)/g, '')
+  .trim();
 ---
 
 <html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>{nota.frontmatter.title}</title>
+    <title>{tabTitle}</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,900;1,300;1,900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body>
