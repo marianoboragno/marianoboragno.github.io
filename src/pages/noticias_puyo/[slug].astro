@@ -124,6 +124,20 @@ const titleHtml = rawTitle
     font-size: 1.05rem;
     color: #222;
     column-count: 1;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  /* Párrafos generales justificados por defecto */
+  .cuerpo-texto p {
+    text-align: justify;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Excepción para alinear a la izquierda si Paco lo necesita */
+  .cuerpo-texto p.left {
+    text-align: left;
+    hyphens: manual;
   }
 
   .cuerpo-texto img {
