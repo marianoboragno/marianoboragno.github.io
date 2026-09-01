@@ -66,31 +66,37 @@ const tabTitle = firstLine
         const cuerpo = document.querySelector('.cuerpo-texto');
         if (!cuerpo) return;
 
+        const isVideo = (url) => /\.(mp4|webm|mov|ogg)(\?.*)?$/i.test(url || '');
+
         // 1. Imágenes insertadas por el editor que en realidad son videos (.mp4, .webm, .mov)
-        const videoImgs = cuerpo.querySelectorAll('img[src$=".mp4"], img[src$=".webm"], img[src$=".mov"], img[src$=".ogg"]');
-        videoImgs.forEach((img) => {
-          const video = document.createElement('video');
-          video.src = img.src;
-          video.controls = true;
-          video.playsInline = true;
-          video.className = 'video-reproductor';
-          img.parentNode.replaceChild(video, img);
+        cuerpo.querySelectorAll('img').forEach((img) => {
+          const src = img.getAttribute('src') || img.src || '';
+          if (isVideo(src)) {
+            const video = document.createElement('video');
+            video.src = img.src || src;
+            video.controls = true;
+            video.playsInline = true;
+            video.className = 'video-reproductor';
+            img.parentNode.replaceChild(video, img);
+          }
         });
 
         // 2. Enlaces que apuntan a archivos de video (.mp4, .webm, .mov)
-        const videoLinks = cuerpo.querySelectorAll('a[href$=".mp4"], a[href$=".webm"], a[href$=".mov"], a[href$=".ogg"]');
-        videoLinks.forEach((link) => {
-          const video = document.createElement('video');
-          video.src = link.getAttribute('href');
-          video.controls = true;
-          video.playsInline = true;
-          video.className = 'video-reproductor';
-          
-          const parentP = link.closest('p');
-          if (parentP && parentP.textContent.trim() === link.textContent.trim()) {
-            parentP.parentNode.replaceChild(video, parentP);
-          } else {
-            link.parentNode.replaceChild(video, link);
+        cuerpo.querySelectorAll('a').forEach((link) => {
+          const href = link.getAttribute('href') || '';
+          if (isVideo(href)) {
+            const video = document.createElement('video');
+            video.src = href;
+            video.controls = true;
+            video.playsInline = true;
+            video.className = 'video-reproductor';
+            
+            const parentP = link.closest('p');
+            if (parentP && parentP.textContent.trim() === link.textContent.trim()) {
+              parentP.parentNode.replaceChild(video, parentP);
+            } else {
+              link.parentNode.replaceChild(video, link);
+            }
           }
         });
 
