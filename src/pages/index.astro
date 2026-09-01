@@ -1,38 +1,583 @@
 ---
-// Todo lo que está entre los tres guiones se ejecuta en el servidor al compilar.
-// Traemos todos los archivos Markdown de tus noticias.
-const notas = Object.values(import.meta.glob('../content/noticias_puyo/*.md', { eager: true }));
+// Cargamos todas las noticias de la carpeta content/noticias_puyo
+const rawNotas = Object.values(import.meta.glob('../content/noticias_puyo/*.md', { eager: true }));
+
+// Ordenamos las notas por fecha de forma descendente (la más reciente primero)
+const notas = rawNotas
+  .map((nota) => {
+    const slug = nota.file.split('/').pop().replace('.md', '');
+    return { ...nota, slug };
+  })
+  .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+
+// Función para formatear fechas al estilo editorial
+function formatDate(dateString) {
+  if (!dateString) return '';
+  const d = new Date(dateString);
+  return `${d.getDate()} ${d.toLocaleString('es-AR', { month: 'long' })}, ${d.getFullYear()}`;
+}
+
+// Función para parsear títulos con negrita y cursiva Markdown
+function formatTitle(rawTitle) {
+  if (!rawTitle) return '';
+  return rawTitle
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/_(.*?)_/g, '<em>$1</em>')
+    .replace(/\n/g, '<br/>');
+}
+
+// Función para extraer un extracto limpio de texto para la bajada
+function getExcerpt(nota, maxLength = 160) {
+  const raw = typeof nota.rawContent === 'function' ? nota.rawContent() : '';
+  const clean = raw
+    .replace(/!\[.*?\]\(.*?\)/g, '') // Quita imágenes
+    .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Deja sólo el texto del enlace
+    .replace(/#{1,6}\s+/g, '') // Quita encabezados
+    .replace(/(\*\*|\*|_|`)/g, '') // Quita formato markdown básico
+    .replace(/\n+/g, ' ')
+    .trim();
+  
+  if (clean.length <= maxLength) return clean;
+  return clean.slice(0, maxLength).trim() + '…';
+}
+
+const notaPrincipal = notas[0];
+const notasSecundarias = notas.slice(1);
+
+const today = new Date();
+const fechaHoy = today.toLocaleDateString('es-AR', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
 ---
 
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Noticias Puyo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noticias Puyo — Diario Editorial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,700;0,900;1,300;1,900&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   </head>
-  <body style="font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
-    <h1>Noticias Puyo</h1>
-    <hr />
-    
-    <h2>Últimas noticias</h2>
-    <ul>
-      {notas.map((nota) => {
-        // Extraemos el nombre del archivo para armar la URL
-        const slug = nota.file.split('/').pop().replace('.md', '');
-        
-        return (
-          <li style="margin-bottom: 20px;">
-            <a href={`/noticias_puyo/${slug}`}>
-              <h3>{nota.frontmatter.title}</h3>
-            </a>
-            <small>{new Date(nota.frontmatter.date).toLocaleDateString('es-AR')}</small>
-            <br />
-            {nota.frontmatter.thumbnail && (
-              <img src={nota.frontmatter.thumbnail} alt="miniatura" style="max-width: 200px; margin-top: 10px;" />
-            )}
-          </li>
-        );
-      })}
-    </ul>
+  <body>
+    <div class="background-patron"></div>
+
+    <main class="index-container">
+      
+      <!-- Cabecera estilo periódico -->
+      <header class="periodico-header">
+        <div class="top-meta-bar">
+          <span class="meta-item fecha-hoy">{fechaHoy}</span>
+          <span class="meta-item edicion-tag">Edición Digital</span>
+          <span class="meta-item l-gastronomica">Sección Papas & Cocina</span>
+        </div>
+
+        <div class="masthead">
+          <a href="/" class="masthead-link">
+            <h1 class="diario-title">NOTICIAS PUYO</h1>
+          </a>
+          <p class="diario-lema">
+            «Órgano oficial del tubérculo, la incertidumbre y el arte de la sobrecocción»
+          </p>
+        </div>
+
+        <div class="header-divider"></div>
+      </header>
+
+      {notas.length === 0 ? (
+        <div class="sin-noticias">
+          <p>No hay noticias publicadas en este momento.</p>
+        </div>
+      ) : (
+        <section class="noticias-layout">
+          
+          <!-- Noticia Principal (Tapa) -->
+          {notaPrincipal && (
+            <article class="nota-destacada">
+              <a href={`/noticias_puyo/${notaPrincipal.slug}`} class="destacada-link">
+                {notaPrincipal.frontmatter.thumbnail && (
+                  <div class="destacada-img-wrapper">
+                    <img 
+                      src={notaPrincipal.frontmatter.thumbnail} 
+                      alt={notaPrincipal.frontmatter.title} 
+                      class="destacada-img" 
+                    />
+                    <span class="tag-tapa">Tapa</span>
+                  </div>
+                )}
+
+                <div class="destacada-info">
+                  <span class="fecha">{formatDate(notaPrincipal.frontmatter.date)}</span>
+                  <h2 class="destacada-titulo" set:html={formatTitle(notaPrincipal.frontmatter.title)}></h2>
+                  
+                  {getExcerpt(notaPrincipal) && (
+                    <p class="destacada-bajada">
+                      {getExcerpt(notaPrincipal, 220)}
+                    </p>
+                  )}
+
+                  <span class="leer-mas">
+                    Leer nota completa <span class="flecha">→</span>
+                  </span>
+                </div>
+              </a>
+            </article>
+          )}
+
+          <!-- Grilla de Noticias Secundarias -->
+          {notasSecundarias.length > 0 && (
+            <div class="archivo-seccion">
+              <div class="seccion-titulo-wrapper">
+                <h3 class="seccion-titulo">Otras Publicaciones</h3>
+                <div class="seccion-line"></div>
+              </div>
+
+              <div class="grilla-secundarias">
+                {notasSecundarias.map((nota) => (
+                  <article class="tarjeta-secundaria">
+                    <a href={`/noticias_puyo/${nota.slug}`} class="secundaria-link">
+                      {nota.frontmatter.thumbnail && (
+                        <div class="secundaria-img-wrapper">
+                          <img 
+                            src={nota.frontmatter.thumbnail} 
+                            alt={nota.frontmatter.title} 
+                            class="secundaria-img" 
+                          />
+                        </div>
+                      )}
+
+                      <div class="secundaria-cuerpo">
+                        <span class="fecha">{formatDate(nota.frontmatter.date)}</span>
+                        <h4 class="secundaria-titulo" set:html={formatTitle(nota.frontmatter.title)}></h4>
+                        
+                        {getExcerpt(nota) && (
+                          <p class="secundaria-bajada">
+                            {getExcerpt(nota, 130)}
+                          </p>
+                        )}
+
+                        <span class="leer-mas-secundaria">
+                          Leer artículo <span class="flecha">→</span>
+                        </span>
+                      </div>
+                    </a>
+                  </article>
+                ))}
+              </div>
+            </div>
+          )}
+
+        </section>
+      )}
+
+      <!-- Pie de página editorial -->
+      <footer class="periodico-footer">
+        <div class="footer-divider"></div>
+        <div class="footer-content">
+          <p class="footer-creditos">
+            © {today.getFullYear()} <strong>Noticias Puyo</strong> — Todos los derechos y todas las papas pasadas.
+          </p>
+          <a href="/admin/" class="footer-admin-link">
+            ⚙️ Redacción / CMS
+          </a>
+        </div>
+      </footer>
+
+    </main>
   </body>
 </html>
+
+<style is:global>
+  body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 15px;
+    position: relative;
+    color: #222;
+    background-color: #2b2b2b;
+  }
+
+  .background-patron {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/assets/img/fondo-mercedes.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1;
+  }
+
+  .index-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    padding: 25px 20px;
+    box-sizing: border-box;
+  }
+
+  /* Cabecera Periodística */
+  .periodico-header {
+    margin-bottom: 25px;
+  }
+
+  .top-meta-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #555;
+  }
+
+  .masthead {
+    text-align: center;
+    padding: 20px 0 10px 0;
+  }
+
+  .masthead-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .diario-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .diario-lema {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #666;
+    margin: 8px 0 0 0;
+  }
+
+  .header-divider {
+    border-top: 3px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+    height: 3px;
+    margin-top: 15px;
+  }
+
+  /* Noticia Destacada / Tapa */
+  .nota-destacada {
+    margin-bottom: 35px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 30px;
+  }
+
+  .destacada-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .destacada-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background: #000;
+  }
+
+  .destacada-img {
+    width: 100%;
+    height: auto;
+    max-height: 480px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, opacity 0.3s ease;
+  }
+
+  .destacada-link:hover .destacada-img {
+    transform: scale(1.02);
+    opacity: 0.95;
+  }
+
+  .tag-tapa {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+  }
+
+  .fecha {
+    font-family: 'Montserrat', sans-serif;
+    color: #888;
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 8px;
+    text-transform: capitalize;
+  }
+
+  .destacada-titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 2.3rem;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    color: #1a1a1a;
+    margin: 5px 0 15px 0;
+    transition: color 0.2s ease;
+  }
+
+  .destacada-link:hover .destacada-titulo {
+    color: #444;
+  }
+
+  .destacada-titulo strong {
+    font-weight: 900;
+  }
+
+  .destacada-titulo em {
+    font-style: italic;
+  }
+
+  .destacada-bajada {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 15px;
+    text-align: left;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    overflow-wrap: break-word;
+  }
+
+  .leer-mas {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 2px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .destacada-link:hover .leer-mas {
+    transform: translateX(4px);
+  }
+
+  .flecha {
+    transition: transform 0.2s ease;
+  }
+
+  /* Sección Archivo / Otras Noticias */
+  .archivo-seccion {
+    margin-top: 20px;
+  }
+
+  .seccion-titulo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  .seccion-titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #1a1a1a;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .seccion-line {
+    flex: 1;
+    height: 1px;
+    background: #1a1a1a;
+  }
+
+  .grilla-secundarias {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .tarjeta-secundaria {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+  }
+
+  .secundaria-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .secundaria-img-wrapper {
+    overflow: hidden;
+    background: #f0f0f0;
+    max-height: 220px;
+  }
+
+  .secundaria-img {
+    width: 100%;
+    height: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .secundaria-link:hover .secundaria-img {
+    transform: scale(1.03);
+  }
+
+  .secundaria-titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+    color: #1a1a1a;
+    margin: 4px 0 8px 0;
+  }
+
+  .secundaria-titulo strong {
+    font-weight: 900;
+  }
+
+  .secundaria-titulo em {
+    font-style: italic;
+  }
+
+  .secundaria-bajada {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 12px;
+    text-align: left;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    overflow-wrap: break-word;
+  }
+
+  .leer-mas-secundaria {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+  }
+
+  .secundaria-link:hover .leer-mas-secundaria {
+    color: #000;
+  }
+
+  /* Footer */
+  .periodico-footer {
+    margin-top: 40px;
+    padding-top: 15px;
+  }
+
+  .footer-divider {
+    border-top: 1px solid #1a1a1a;
+    border-bottom: 3px solid #1a1a1a;
+    height: 3px;
+    margin-bottom: 15px;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  .footer-admin-link {
+    text-decoration: none;
+    color: #666;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .footer-admin-link:hover {
+    color: #000;
+    border-color: #999;
+    background: #f9f9f9;
+  }
+
+  /* Responsive Desktop */
+  @media (min-width: 768px) {
+    body {
+      padding: 40px;
+    }
+
+    .index-container {
+      padding: 35px 50px 40px 50px;
+    }
+
+    .diario-title {
+      font-size: 4.5rem;
+      letter-spacing: -3px;
+    }
+
+    .destacada-titulo {
+      font-size: 3.4rem;
+      letter-spacing: -2px;
+    }
+
+    .grilla-secundarias {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .tarjeta-secundaria {
+      border-bottom: none;
+      padding-bottom: 0;
+      border-right: 1px solid #eee;
+      padding-right: 25px;
+    }
+
+    .tarjeta-secundaria:nth-child(2n) {
+      border-right: none;
+      padding-right: 0;
+    }
+  }
+</style>
