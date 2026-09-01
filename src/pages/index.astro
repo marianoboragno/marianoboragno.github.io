@@ -24,7 +24,7 @@ function formatTitle(rawTitle) {
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
     .replace(/_(.*?)_/g, '<em>$1</em>')
-    .replace(/\n/g, '<br/>');
+    .replace(/\r?\n+/g, '<br/>');
 }
 
 // Función para extraer un extracto limpio de texto para la bajada
@@ -560,6 +560,7 @@ const fechaHoy = today.toLocaleDateString('es-AR', {
 
     .destacada-titulo {
       font-size: 3.4rem;
+      line-height: 0.95;
       letter-spacing: -2px;
     }
 

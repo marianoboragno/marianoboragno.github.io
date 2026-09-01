@@ -22,7 +22,7 @@ const titleHtml = rawTitle
   .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
   .replace(/\*(.*?)\*/g, '<em>$1</em>')
   .replace(/_(.*?)_/g, '<em>$1</em>')
-  .replace(/\n/g, '<br/>');
+  .replace(/\r?\n+/g, '<br/>');
 ---
 
 <html lang="es">
@@ -215,6 +215,7 @@ const titleHtml = rawTitle
     }
     .titulo {
       font-size: 5rem;
+      line-height: 0.95;
     }
     .cuerpo-texto {
       column-count: 2;
