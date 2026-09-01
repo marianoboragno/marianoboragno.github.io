@@ -1,5 +1,8 @@
 ---
-title: '**_El salame quintero de Mercedes:_** _Tradición artesanal e identidad bonaerense_'
+title: |-
+  **_El salame quintero de Mercedes_**
+
+  _Tradición artesanal e identidad bonaerense_
 date: 2026-08-31T23:33:00
 thumbnail: /assets/img/pasted-image-1788237218455.png
 ---
