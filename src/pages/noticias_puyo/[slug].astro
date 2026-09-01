@@ -1,42 +1,197 @@
 ---
-// getStaticPaths le dice a Astro qué URLs tiene que generar
 export async function getStaticPaths() {
   const notas = Object.values(import.meta.glob('../../content/noticias_puyo/*.md', { eager: true }));
   
   return notas.map((nota) => {
     const slug = nota.file.split('/').pop().replace('.md', '');
     return {
-      params: { slug }, // Define la URL
-      props: { nota },  // Le pasa los datos del Markdown a la plantilla
+      params: { slug },
+      props: { nota },
     };
   });
 }
 
-// Recibimos los datos de la nota actual
 const { nota } = Astro.props;
-// Extraemos el componente Content, que es el cuerpo del Markdown ya convertido a HTML
 const { Content } = nota;
+
+const d = new Date(nota.frontmatter.date);
+const formattedDate = `${d.getDate()} ${d.toLocaleString('es-AR', {month: 'long'})}, ${d.getFullYear()}`;
+
+const rawTitle = nota.frontmatter.title || '';
+const titleHtml = rawTitle
+  .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+  .replace(/\*(.*?)\*/g, '<em>$1</em>')
+  .replace(/_(.*?)_/g, '<em>$1</em>')
+  .replace(/\n/g, '<br/>');
 ---
 
 <html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>{nota.frontmatter.title} - Noticias Puyo</title>
+    <title>{nota.frontmatter.title}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,900;1,300;1,900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
   </head>
-  <body style="font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
-    <a href="/" style="color: blue; text-decoration: none;">← Volver al inicio</a>
-    <hr style="margin: 20px 0;" />
+  <body>
+    <div class="background-patron"></div>
     
-    <h1>{nota.frontmatter.title}</h1>
-    <p style="color: #666;">Publicado el {new Date(nota.frontmatter.date).toLocaleDateString('es-AR')}</p>
-    
-    {nota.frontmatter.thumbnail && (
-      <img src={nota.frontmatter.thumbnail} alt="Portada de la noticia" style="width: 100%; max-width: 600px; display: block; margin: 20px 0; border-radius: 8px;" />
-    )}
-    
-    <div style="line-height: 1.6; font-size: 1.1rem;">
-      <Content />
-    </div>
+    <article class="nota-container">
+      
+      <div class="header-section">
+        {nota.frontmatter.thumbnail && (
+          <img src={nota.frontmatter.thumbnail} alt="Portada" class="imagen-portada" />
+        )}
+      </div>
+
+      <div class="content-section">
+        <h1 class="titulo" set:html={titleHtml}></h1>
+
+        <div class="cuerpo-texto">
+          <p class="fecha">{formattedDate}</p>
+          <Content />
+        </div>
+      </div>
+      
+    </article>
   </body>
 </html>
+
+<style is:global>
+  body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 15px;
+    position: relative;
+  }
+
+  .background-patron {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/assets/img/fondo-mercedes.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1;
+  }
+
+  .nota-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  .imagen-portada {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .content-section {
+    padding: 20px;
+  }
+
+  .titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 3.5rem;
+    line-height: 1;
+    letter-spacing: -2px;
+    color: #1a1a1a;
+    margin: 10px 0 30px 0;
+  }
+
+  .titulo strong {
+    font-weight: 900;
+  }
+
+  .titulo em {
+    font-style: italic;
+  }
+
+  .fecha {
+    font-family: 'Montserrat', sans-serif;
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  .cuerpo-texto {
+    line-height: 1.6;
+    font-size: 1.05rem;
+    color: #222;
+    column-count: 1;
+  }
+
+  .cuerpo-texto > p:nth-of-type(2) {
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .cuerpo-texto img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+  }
+
+  .cuerpo-texto p:has(img) {
+    break-inside: avoid;
+    margin: 0;
+  }
+
+  .cuerpo-texto blockquote {
+    margin: 20px 0;
+    padding: 0;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: #666;
+    break-inside: avoid;
+  }
+
+  .cuerpo-texto blockquote::before {
+    content: '“';
+    display: block;
+    font-size: 4rem;
+    color: #666;
+    line-height: 0.5;
+    margin-bottom: 15px;
+  }
+
+  .cuerpo-texto blockquote::after {
+    content: '”';
+    display: block;
+    font-size: 4rem;
+    color: #666;
+    line-height: 0.5;
+    text-align: right;
+    margin-top: 20px;
+  }
+
+  .cuerpo-texto mark {
+    background-color: rgba(173, 216, 230, 0.4);
+    color: inherit;
+    padding: 0 4px;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      padding: 40px;
+    }
+    .content-section {
+      padding: 30px 50px 50px 50px;
+    }
+    .titulo {
+      font-size: 5rem;
+    }
+    .cuerpo-texto {
+      column-count: 2;
+      column-gap: 40px;
+    }
+  }
+</style>
