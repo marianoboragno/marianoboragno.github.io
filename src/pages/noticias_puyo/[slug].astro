@@ -165,33 +165,39 @@ const titleHtml = rawTitle
   }
 
   .cuerpo-texto blockquote {
-    margin: 20px 0;
+    margin: 25px 0;
     padding: 0;
     border: none;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.65rem;
     font-style: italic;
-    color: #666;
+    color: #444;
     break-inside: avoid;
+    line-height: 1.3;
+  }
+
+  .cuerpo-texto blockquote p {
+    margin: 0;
+    text-align: inherit;
   }
 
   .cuerpo-texto blockquote::before {
     content: '“';
     display: block;
-    font-size: 4rem;
-    color: #666;
-    line-height: 0.5;
-    margin-bottom: 15px;
+    font-size: 3.2rem;
+    color: #888;
+    line-height: 0.6;
+    margin-bottom: 2px;
   }
 
   .cuerpo-texto blockquote::after {
     content: '”';
     display: block;
-    font-size: 4rem;
-    color: #666;
-    line-height: 0.5;
+    font-size: 3.2rem;
+    color: #888;
+    line-height: 0.6;
     text-align: right;
-    margin-top: 20px;
+    margin-top: 6px;
   }
 
   .cuerpo-texto mark {
