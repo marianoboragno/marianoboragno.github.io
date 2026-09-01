@@ -1,6 +1,9 @@
 ---
-title: '**_El cultivo del durazno:_** _Innovación y tradición en la fruticultura contemporánea_'
-date: 2026-08-31T23:31:00
+title: |-
+  **_El cultivo del durazno_**
+
+  _Innovación y tradición en la fruticultura contemporánea_
+date: 2026-08-30T16:20:00
 thumbnail: /assets/img/pasted-image-1788237025685.png
 ---
 
