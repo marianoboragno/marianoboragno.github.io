@@ -1,5 +1,5 @@
 ---
-title: _Se viene la 51ª Fiesta Nacional del Salame Quintero_
+title: '**_Se viene la 51ª Fiesta Nacional del Salame Quintero_**'
 date: 2026-08-31T23:33:00
 thumbnail: /assets/img/WhatsApp Image 2026-09-01 at 3.32.34 PM.jpeg
 ---
