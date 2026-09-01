@@ -11,7 +11,7 @@ public_folder: "/assets/img"
 # Colecciones de contenido
 collections:
   - name: "noticias_puyo"
-    label: "Noticias Puyo"
+    label: "Mercedes News"
     folder: "src/content/noticias_puyo"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
