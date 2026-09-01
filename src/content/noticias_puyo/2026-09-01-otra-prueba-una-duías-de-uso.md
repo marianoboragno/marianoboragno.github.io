@@ -1,5 +1,5 @@
 ---
-title: Otra Prueba, Una Duías de Uso
+title: Otra Prueba, Una Guía de Uso
 date: 2026-08-31T19:08:00
 thumbnail: /assets/img/pasted-image-1788221417215.png
 ---
