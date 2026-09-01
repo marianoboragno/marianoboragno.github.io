@@ -3,7 +3,7 @@ title: |-
   **_Mercedes se prepara ante "El Niño"_**
 
   _El objetivo es prevenir y dar respuestas a las posibles consecuencias que tendrá en el territorio el fenómeno climático conocido como “Super Niño”._
-date: 2026-08-30T16:20:00
+date: 2026-09-01T16:01:00
 thumbnail: /assets/img/2023_06_07_ak_reunion-intendentes_032-1jpg.jpg
 ---
 
