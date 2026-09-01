@@ -17,4 +17,6 @@ Proin vel lectus a leo efficitur porttitor id non nisi. Phasellus sed rhoncus lo
 
 ![Otra foto de duraznos](/assets/img/20260831-233055.png)
 
+> Dejaste el pan afuera de la bolsa y se te puso medio durazno
+
 Nullam id dolor nec leo pretium ultrices ac ac justo. Mauris convallis lorem id ante pellentesque, ut finibus nunc volutpat. Phasellus convallis ex sed lectus sodales, ut interdum diam ultrices. Integer quis eleifend elit, at pulvinar metus. Quisque sed volutpat turpis. Proin sollicitudin justo vitae ante rhoncus tempor. Ut efficitur, ligula eget scelerisque varius, enim risus finibus nisl, at imperdiet ligula magna quis velit.
