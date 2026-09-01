@@ -1,6 +1,6 @@
 ---
 title: |-
-  _Fin de una era_
+  **_Fin de una era_**
 
   _Messi se retira de la Selección Argentina_
 date: 2026-08-27T18:03:00
