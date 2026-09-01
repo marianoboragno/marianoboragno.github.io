@@ -8,5 +8,69 @@
   <body>
     <!-- Carga Sveltia CMS (soporta PAT directo y usa el mismo config.yml) -->
     <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+    <script>
+      // Componente para insertar videos locales (.mp4, .webm, etc.)
+      CMS.registerEditorComponent({
+        id: "video",
+        label: "Video (.mp4)",
+        icon: "video_file",
+        fields: [
+          {
+            name: "src",
+            label: "Subir archivo de video o elegir de medios",
+            widget: "file",
+            accept: "video/*,.mp4,.webm,.mov"
+          }
+        ],
+        pattern: /<video controls src="([^"]+)"><\/video>/,
+        fromBlock: function(match) {
+          return {
+            src: match[1]
+          };
+        },
+        toBlock: function(data) {
+          return `<video controls src="${data.src || ''}"></video>`;
+        },
+        toPreview: function(data) {
+          return `<video controls src="${data.src || ''}" style="max-width:100%; border-radius: 8px; margin: 15px 0;"></video>`;
+        }
+      });
+
+      // Componente para insertar videos de YouTube
+      CMS.registerEditorComponent({
+        id: "youtube",
+        label: "YouTube",
+        icon: "play_circle",
+        fields: [
+          {
+            name: "url",
+            label: "Enlace del video de YouTube (ej: https://www.youtube.com/watch?v=...)",
+            widget: "string"
+          }
+        ],
+        pattern: /<iframe src="https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\/([^"?]+)[^"]*".*?><\/iframe>/,
+        fromBlock: function(match) {
+          return {
+            url: `https://www.youtube.com/watch?v=${match[1]}`
+          };
+        },
+        toBlock: function(data) {
+          let id = data.url || '';
+          const match = id.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+          if (match && match[1]) {
+            id = match[1];
+          }
+          return `<iframe src="https://www.youtube-nocookie.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+        },
+        toPreview: function(data) {
+          let id = data.url || '';
+          const match = id.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+          if (match && match[1]) {
+            id = match[1];
+          }
+          return `<iframe src="https://www.youtube-nocookie.com/embed/${id}" style="width:100%; aspect-ratio:16/9; border-radius:8px;" frameborder="0"></iframe>`;
+        }
+      });
+    </script>
   </body>
 </html>
