@@ -1,22 +1,26 @@
 ---
 title: |-
-  **_El cultivo del durazno_**
+  **_Mercedes se prepara ante "El Niño"_**
 
-  _Innovación y tradición en la fruticultura contemporánea_
+  _El objetivo es prevenir y dar respuestas a las posibles consecuencias que tendrá en el territorio el fenómeno climático conocido como “Super Niño”._
 date: 2026-08-30T16:20:00
-thumbnail: /assets/img/pasted-image-1788237025685.png
+thumbnail: /assets/img/2023_06_07_ak_reunion-intendentes_032-1jpg.jpg
 ---
 
-**Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.**
+![Foto de duraznos](/assets/img/image-163-1024x576.webp)
 
-Curabitur pretium tincidunt lacus, nec porta diam iaculis id. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam dynamic feugiat purus id elementum tristique. Mauris scelerisque dolor eu ex efficitur, ac sit amet accumsan est hendrerit. Cras condimentum elementum convallis. Morbi id eleifend magna.
+El gobernador bonaerense [**Axel Kicillof**](https://infocronos.com.ar/nota/57480/en-un-nuevo-cruce-kicillof-califico-de-estupidez-la-explicacion-de-milei-sobre-las-deudas-de-las-familias/) encabezó una conferencia e **Gobernación**, junto a ministros e intendentes para presentar las medidas que se llevaran adelante para paliar los efectos del “**Super Niño**”.
 
-![Foto de duraznos](/assets/img/20260831-232918.png)
+Acompañaron al gobernador el ministro de Gobierno, **Carlos Bianco**, y sus pares de Infraestructura, **Gabriel Katopodis**, de Seguridad, **Javier Alonso**, y de Ambiente, **Daniela Vilar**.
 
-Proin vel lectus a leo efficitur porttitor id non nisi. Phasellus sed rhoncus lorem, eget interdum eros. Suspendisse non nibh vel sapien finibus interdum eu non turpis. Cras sodales lacinia ipsum, eu feugiat purus rhoncus in. Sed ultrices ante vitae massa pretium, sed mattis elit tristique. In auctor, justo eget elementum efficitur, eros nunc accumsan ligula, sit amet imperdiet magna augue sed odio.
+**Kicillof** anunció la creación de una mesa interministerial con vínculo directo con los intendentes para coordinar las acciones de prevención, planificación y respuesta frente al fenómeno climático. Además, detalló que la **Provincia** tiene invertidos durante su gestión unos $2,3 billones en total para afrontar sus posibles consecuencias.
 
-![Otra foto de duraznos](/assets/img/20260831-233055.png)
+![Otra foto de duraznos](/assets/img/juaniustarroz_1787858985637-1014x487.jpeg)
 
-> Dejaste el pan afuera de la bolsa y se te puso medio durazno
+> **La necesidad de planificar mejor las ciudades**
 
-Nullam id dolor nec leo pretium ultrices ac ac justo. Mauris convallis lorem id ante pellentesque, ut finibus nunc volutpat. Phasellus convallis ex sed lectus sodales, ut interdum diam ultrices. Integer quis eleifend elit, at pulvinar metus. Quisque sed volutpat turpis. Proin sollicitudin justo vitae ante rhoncus tempor. Ut efficitur, ligula eget scelerisque varius, enim risus finibus nisl, at imperdiet ligula magna quis velit.
+El geógrafo sostuvo que la infraestructura hídrica disponible muchas veces resulta insuficiente para contener períodos de lluvias excepcionales, incluso cuando se realizan importantes inversiones públicas.
+
+También explicó que numerosas localidades fueron construidas bajo la idea de que la naturaleza podía ser controlada, lo que llevó a que parte de la población se asentara en **zonas bajas, humedales o sectores no aptos para la urbanización**.
+
+Frente a este escenario, remarcó la necesidad de revisar el ordenamiento territorial y evitar que las ciudades continúen expandiéndose sobre áreas vulnerables.
