@@ -1,6 +1,9 @@
 ---
-title: La Cara del Puyo
-date: 2026-08-31T18:03:00
+title: |-
+  **_La Cara del Puyo_**
+
+  _Así se ven los auténticos Puyos_
+date: 2026-08-27T18:03:00
 thumbnail: /assets/img/pasted-image-1788217467113.png
 ---
 
