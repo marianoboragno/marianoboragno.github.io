@@ -137,10 +137,13 @@ const tabTitle = firstLine
   /* Párrafos generales justificados por defecto */
   .cuerpo-texto p {
     text-align: justify;
+    text-align-last: left;
+    text-justify: inter-word;
+    text-wrap: pretty;
     margin-bottom: 1.5rem;
   }
 
-  /* Excepción para alinear a la izquierda si Paco lo necesita */
+  /* Excepción para alinear a la izquierda si se necesita */
   .cuerpo-texto p.left {
     text-align: left;
     hyphens: manual;
@@ -164,10 +167,10 @@ const tabTitle = firstLine
     -webkit-hyphens: auto;
   }
 
-  /* Para las URLs largas: permite el corte en cualquier lugar para que no desborden la columna */
+  /* Para las URLs: permite que empiecen a llenarse en la misma línea sin saltar prematuramente */
   .cuerpo-texto a {
     overflow-wrap: anywhere;
-    word-break: break-word;
+    word-break: break-all;
   }
 
   .cuerpo-texto blockquote {
